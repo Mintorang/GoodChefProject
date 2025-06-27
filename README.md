@@ -27,5 +27,8 @@
 ## Contributing:
 Feel free to fork the repository and submit pull requests for any improvements.
 
+## WorkFlow
+https://lucid.app/lucidchart/38861003-2e6d-4789-88d9-cff099367deb/edit?invitationId=inv_fca26fdc-a824-49f9-8b78-9753365d5a8e
+
 ## License:
 This project is licensed under the MIT License.
