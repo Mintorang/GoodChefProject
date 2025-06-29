@@ -1,0 +1,181 @@
+{% extends 'menu/base.html' %}
+
+{% block title %}Full Menu - Good Chef{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h2>🍽️ Our Delicious Menu</h2>
+    <p>Discover our authentic Chinese dishes made with fresh ingredients and traditional recipes</p>
+    <a href="#menu" class="cta-button">View Full Menu</a>
+</div>
+
+<div id="menu" class="menu-grid">
+    {% for category in categories %}
+    <div class="category-card">
+        <div class="category-header">
+            <span class="category-emoji">{{ category.emoji }}</span>
+            <h3 class="category-title">{{ category.name }}</h3>
+        </div>
+        
+        {% for item in category.items.all %}
+        <div class="menu-item">
+            <div class="item-info">
+                <div class="item-name">{{ item.name }}</div>
+                {% if item.description %}
+                <div class="item-description">{{ item.description }}</div>
+                {% endif %}
+            </div>
+            <div style="display: flex; align-items: center;">
+                <span class="item-price">£{{ item.price }}</span>
+                <button class="add-to-cart" onclick="addToCart('{{ item.name }}', {{ item.price }})">
+                    <i class="fas fa-plus"></i> Add
+                </button>
+            </div>
+        </div>
+        {% empty %}
+        <p style="color: #666; font-style: italic;">No items available</p>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+
+<style>
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), #d32f2f;
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    margin-bottom: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+}
+
+.cta-button {
+    background: linear-gradient(135deg, #ffd700 0%, #ffed4e 100%);
+    color: #333;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    border-radius: 50px;
+    font-weight: bold;
+    transition: all 0.3s ease;
+    box-shadow: 0 5px 15px rgba(255,215,0,0.3);
+}
+
+.cta-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(255,215,0,0.4);
+}
+
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+.category-card {
+    background: white;
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    border: 1px solid #e9ecef;
+}
+
+.category-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+}
+
+.category-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 3px solid #d32f2f;
+}
+
+.category-emoji {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+}
+
+.category-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #d32f2f;
+}
+
+.menu-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem 0;
+    border-bottom: 1px solid #f0f0f0;
+    transition: all 0.3s ease;
+}
+
+.menu-item:hover {
+    background: #f8f9fa;
+    padding-left: 0.5rem;
+    border-radius: 8px;
+}
+
+.item-name {
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 0.25rem;
+}
+
+.item-price {
+    font-weight: bold;
+    color: #d32f2f;
+    font-size: 1.1rem;
+    margin: 0 1rem;
+}
+
+.add-to-cart {
+    background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%);
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 25px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px rgba(211,47,47,0.3);
+}
+
+.add-to-cart:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(211,47,47,0.4);
+}
+
+@media (max-width: 768px) {
+    .menu-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+    
+    .category-card {
+        padding: 1.5rem;
+    }
+}
+</style>
+{% endblock %} 

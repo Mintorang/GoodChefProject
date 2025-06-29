@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Good Chef - Chinese Takeaway{% endblock %}</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; background: #ffffff; color: #333; }
+        
+        .header {
+            background: #ffffff;
+            color: #333;
+            padding: 1rem 0;
+            border-bottom: 3px solid #d32f2f;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo h1 { font-size: 2.5rem; font-weight: bold; color: #d32f2f; }
+        .logo p { font-size: 1rem; color: #666; }
+        .phone { font-size: 1.4rem; font-weight: bold; color: #d32f2f; }
+        
+        .nav {
+            background: #d32f2f;
+            padding: 0;
+        }
+        
+        .nav-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        .nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .nav a {
+            color: white;
+            text-decoration: none;
+            padding: 1rem 1.5rem;
+            display: block;
+            transition: all 0.3s ease;
+            border-right: 1px solid rgba(255,255,255,0.2);
+            font-weight: 500;
+        }
+        
+        .nav a:hover { background: #b71c1c; }
+        .nav li:last-child a { border-right: none; }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #ffd700;
+            color: #333;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+        
+        .main-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+        
+        .hero {
+            background: #d32f2f;
+            color: white;
+            text-align: center;
+            padding: 4rem 2rem;
+            margin-bottom: 3rem;
+            border-radius: 10px;
+        }
+        
+        .hero h2 { font-size: 2.5rem; margin-bottom: 1rem; }
+        .hero p { font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9; }
+        
+        .cta-button {
+            background: #ffffff;
+            color: #d32f2f;
+            padding: 1rem 2rem;
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+        
+        .cta-button:hover { background: #f0f0f0; transform: translateY(-2px); }
+        
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .category-card {
+            background: white;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+        
+        .category-card:hover { border-color: #d32f2f; box-shadow: 0 5px 15px rgba(211,47,47,0.1); }
+        
+        .category-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #d32f2f;
+        }
+        
+        .category-emoji { font-size: 2.5rem; margin-right: 1rem; }
+        .category-title { font-size: 1.5rem; font-weight: bold; color: #d32f2f; }
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .menu-item:last-child { border-bottom: none; }
+        .item-name { font-weight: 600; color: #333; margin-bottom: 0.25rem; }
+        .item-price { font-weight: bold; color: #d32f2f; font-size: 1.1rem; margin: 0 1rem; }
+        
+        .add-to-cart {
+            background: #d32f2f;
+            color: white;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .add-to-cart:hover { background: #b71c1c; }
+        
+        .footer {
+            background: #333;
+            color: white;
+            padding: 3rem 0 1rem;
+            margin-top: 4rem;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+        
+        .footer-section h3 { color: #d32f2f; margin-bottom: 1rem; }
+        .footer-section p, .footer-section a { color: #ccc; text-decoration: none; margin-bottom: 0.5rem; display: block; }
+        .footer-section a:hover { color: #d32f2f; }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid #555;
+            margin-top: 2rem;
+            color: #999;
+        }
+        
+        .cart-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.5);
+            z-index: 1000;
+        }
+        
+        .cart-content {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            border: 2px solid #d32f2f;
+        }
+        
+        .close {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #666;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .cart-total {
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 2px solid #d32f2f;
+            color: #d32f2f;
+        }
+        
+        .checkout-btn {
+            background: #d32f2f;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 1rem;
+            font-weight: bold;
+        }
+        
+        .checkout-btn:hover { background: #b71c1c; }
+        
+        @media (max-width: 768px) {
+            .header-content { flex-direction: column; gap: 1rem; text-align: center; }
+            .nav ul { flex-direction: column; }
+            .nav a { border-right: none; border-bottom: 1px solid rgba(255,255,255,0.2); }
+            .menu-grid { grid-template-columns: 1fr; }
+            .hero h2 { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <div class="logo">
+                <h1>🥢 Good Chef</h1>
+                <p>Authentic Chinese Takeaway</p>
+            </div>
+            <div class="contact-info">
+                <p>📞 <span class="phone">01234 567890</span></p>
+                <p>🕒 Open Daily 5pm - 11pm</p>
+                <p>📍 123 High Street, Bedford</p>
+            </div>
+        </div>
+    </header>
+    
+    <nav class="nav">
+        <div class="nav-content">
+            <ul>
+                <li><a href="{% url 'home' %}">🏠 Home</a></li>
+                <li><a href="{% url 'menu:menu_list' %}">🍽️ Menu</a></li>
+                <li><a href="{% url 'menu:about' %}">ℹ️ About Us</a></li>
+                <li><a href="{% url 'menu:contact' %}">📧 Contact</a></li>
+                <li><a href="{% url 'menu:delivery' %}">🚚 Delivery</a></li>
+                <li style="position: relative;">
+                    <a href="#" onclick="openCart()">
+                        🛒 Cart <span class="cart-count" id="cartCount">0</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    
+    <div class="main-content">
+        {% block content %}{% endblock %}
+    </div>
+    
+    <div id="cartModal" class="cart-modal">
+        <div class="cart-content">
+            <span class="close" onclick="closeCart()">&times;</span>
+            <h2>🛒 Your Order</h2>
+            <div id="cartItems"></div>
+            <div class="cart-total">
+                Total: £<span id="cartTotal">0.00</span>
+            </div>
+            <button class="checkout-btn" onclick="goToCheckout()">
+                💳 Proceed to Checkout
+            </button>
+        </div>
+    </div>
+    
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>🥢 Good Chef</h3>
+                <p>Serving authentic Chinese cuisine since 1995. Fresh ingredients, traditional recipes, and exceptional taste.</p>
+            </div>
+            <div class="footer-section">
+                <h3>🕒 Opening Hours</h3>
+                <p>Monday - Sunday</p>
+                <p>5:00 PM - 11:00 PM</p>
+                <p>Last orders: 10:30 PM</p>
+            </div>
+            <div class="footer-section">
+                <h3>📞 Contact</h3>
+                <p>Phone: 01234 567890</p>
+                <p>Email: info@goodchef.co.uk</p>
+                <p>Address: 123 High Street, Bedford</p>
+            </div>
+            <div class="footer-section">
+                <h3>🚚 Delivery</h3>
+                <p>Free delivery on orders over £15</p>
+                <p>Delivery time: 30-45 minutes</p>
+                <p>Minimum order: £8</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Good Chef Chinese Takeaway. All rights reserved.</p>
+        </div>
+    </footer>
+    
+    <script>
+        let cart = [];
+        
+        function addToCart(name, price) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) {
+                existingItem.quantity += 1;
+            } else {
+                cart.push({ name, price, quantity: 1 });
+            }
+            updateCartDisplay();
+            showNotification('Item added to cart!');
+        }
+        
+        function updateCartDisplay() {
+            const cartCount = document.getElementById('cartCount');
+            const cartItems = document.getElementById('cartItems');
+            const cartTotal = document.getElementById('cartTotal');
+            
+            const totalItems = cart.reduce((sum, item) => sum + item.quantity, 0);
+            const totalPrice = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+            
+            cartCount.textContent = totalItems;
+            cartTotal.textContent = totalPrice.toFixed(2);
+            
+            cartItems.innerHTML = cart.map(item => `
+                <div class="cart-item">
+                    <div>
+                        <strong>${item.name}</strong>
+                        <br><small>£${item.price} x ${item.quantity}</small>
+                    </div>
+                    <div>
+                        £${(item.price * item.quantity).toFixed(2)}
+                        <button onclick="removeFromCart('${item.name}')" style="background: #ff4444; color: white; border: none; padding: 0.5rem 0.8rem; border-radius: 3px; margin-left: 0.5rem; cursor: pointer;">×</button>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            updateCartDisplay();
+        }
+        
+        function openCart() {
+            document.getElementById('cartModal').style.display = 'block';
+        }
+        
+        function closeCart() {
+            document.getElementById('cartModal').style.display = 'none';
+        }
+        
+        function goToCheckout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            localStorage.setItem('cart', JSON.stringify(cart));
+            window.location.href = '/menu/checkout/';
+        }
+        
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #4CAF50;
+                color: white;
+                padding: 1rem 1.5rem;
+                border-radius: 5px;
+                z-index: 1001;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        window.onclick = function(event) {
+            const modal = document.getElementById('cartModal');
+            if (event.target === modal) {
+                closeCart();
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,183 @@
+{% extends 'menu/base.html' %}
+
+{% block title %}Checkout - Good Chef{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h2>💳 Checkout</h2>
+    <p>Complete your order</p>
+</div>
+
+<div style="display: grid; grid-template-columns: 2fr 1fr; gap: 2rem;">
+    <!-- Order Form -->
+    <div style="background: white; padding: 2rem; border-radius: 10px; border: 2px solid #e0e0e0;">
+        <h3 style="color: #d32f2f; margin-bottom: 1.5rem; font-size: 1.5rem;">📋 Delivery Information</h3>
+        
+        <form id="checkoutForm" style="display: grid; gap: 1rem;">
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">First Name *</label>
+                    <input type="text" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+                <div>
+                    <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Last Name *</label>
+                    <input type="text" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                </div>
+            </div>
+            
+            <div>
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Phone Number *</label>
+                <input type="tel" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            
+            <div>
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email Address</label>
+                <input type="email" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            
+            <div>
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Delivery Address *</label>
+                <textarea rows="3" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+            </div>
+            
+            <div>
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Postcode *</label>
+                <input type="text" required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+            </div>
+            
+            <div>
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Delivery Instructions</label>
+                <textarea rows="2" placeholder="Any special instructions for delivery..." style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+            </div>
+            
+            <div>
+                <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Payment Method *</label>
+                <select required style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+                    <option value="">Select payment method</option>
+                    <option value="cash">Cash on Delivery</option>
+                    <option value="card">Card on Delivery</option>
+                </select>
+            </div>
+        </form>
+    </div>
+    
+    <!-- Order Summary -->
+    <div style="background: white; padding: 2rem; border-radius: 10px; border: 2px solid #e0e0e0; height: fit-content;">
+        <h3 style="color: #d32f2f; margin-bottom: 1.5rem; font-size: 1.5rem;">📦 Order Summary</h3>
+        
+        <div id="orderItems" style="margin-bottom: 1.5rem;">
+            <!-- Order items will be populated by JavaScript -->
+        </div>
+        
+        <div style="border-top: 2px solid #d32f2f; padding-top: 1rem;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Subtotal:</span>
+                <span>£<span id="subtotal">0.00</span></span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem;">
+                <span>Delivery:</span>
+                <span id="deliveryCost">£2.50</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; font-weight: bold; font-size: 1.2rem; color: #d32f2f; border-top: 1px solid #ddd; padding-top: 0.5rem;">
+                <span>Total:</span>
+                <span>£<span id="total">0.00</span></span>
+            </div>
+        </div>
+        
+        <button onclick="placeOrder()" style="background: #d32f2f; color: white; padding: 1rem 2rem; border: none; border-radius: 5px; font-size: 1.1rem; cursor: pointer; width: 100%; margin-top: 1.5rem; font-weight: bold;">
+            <i class="fas fa-check"></i> Place Order
+        </button>
+        
+        <button onclick="window.location.href='/menu/'" style="background: #666; color: white; padding: 0.8rem 1.5rem; border: none; border-radius: 5px; font-size: 1rem; cursor: pointer; width: 100%; margin-top: 0.5rem;">
+            <i class="fas fa-arrow-left"></i> Back to Menu
+        </button>
+    </div>
+</div>
+
+<style>
+.hero {
+    background: #d32f2f;
+    color: white;
+    text-align: center;
+    padding: 3rem 2rem;
+    margin-bottom: 2rem;
+    border-radius: 10px;
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+
+@media (max-width: 768px) {
+    .checkout-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .hero h2 {
+        font-size: 2rem;
+    }
+}
+</style>
+
+<script>
+    // Load cart data from localStorage
+    let cart = [];
+    
+    window.onload = function() {
+        const cartData = localStorage.getItem('cart');
+        if (cartData) {
+            cart = JSON.parse(cartData);
+            displayOrderSummary();
+        } else {
+            // No cart data, redirect to menu
+            window.location.href = '/menu/';
+        }
+    }
+    
+    function displayOrderSummary() {
+        const orderItems = document.getElementById('orderItems');
+        const subtotalElement = document.getElementById('subtotal');
+        const totalElement = document.getElementById('total');
+        const deliveryElement = document.getElementById('deliveryCost');
+        
+        const subtotal = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+        const deliveryCost = subtotal >= 15 ? 0 : 2.50;
+        const total = subtotal + deliveryCost;
+        
+        orderItems.innerHTML = cart.map(item => `
+            <div style="display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid #f0f0f0;">
+                <div>
+                    <strong>${item.name}</strong>
+                    <br><small>Qty: ${item.quantity}</small>
+                </div>
+                <div>£${(item.price * item.quantity).toFixed(2)}</div>
+            </div>
+        `).join('');
+        
+        subtotalElement.textContent = subtotal.toFixed(2);
+        deliveryElement.textContent = subtotal >= 15 ? 'FREE' : '£2.50';
+        totalElement.textContent = total.toFixed(2);
+    }
+    
+    function placeOrder() {
+        const form = document.getElementById('checkoutForm');
+        if (!form.checkValidity()) {
+            alert('Please fill in all required fields.');
+            return;
+        }
+        
+        // Show success message
+        alert('Thank you for your order! We will contact you shortly to confirm delivery details. Your order number is: ' + Math.floor(Math.random() * 10000));
+        
+        // Clear cart and redirect
+        localStorage.removeItem('cart');
+        window.location.href = '/menu/';
+    }
+</script>
+{% endblock %}

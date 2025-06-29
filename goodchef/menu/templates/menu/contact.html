@@ -1,0 +1,97 @@
+{% extends 'menu/base.html' %}
+
+{% block title %}Contact Us - Good Chef{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h2>📧 Contact Us</h2>
+    <p>Get in touch with us for orders, questions, or feedback</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+    <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+        <h3 style="color: #d32f2f; margin-bottom: 1rem;">📞 Phone</h3>
+        <p style="font-size: 1.2rem; font-weight: bold; color: #333;">01234 567890</p>
+        <p style="color: #666; margin-top: 0.5rem;">Call us for orders and inquiries</p>
+    </div>
+    
+    <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+        <h3 style="color: #d32f2f; margin-bottom: 1rem;">📧 Email</h3>
+        <p style="font-size: 1.2rem; font-weight: bold; color: #333;">info@goodchef.co.uk</p>
+        <p style="color: #666; margin-top: 0.5rem;">Send us your questions and feedback</p>
+    </div>
+    
+    <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+        <h3 style="color: #d32f2f; margin-bottom: 1rem;">📍 Address</h3>
+        <p style="font-size: 1.2rem; font-weight: bold; color: #333;">123 High Street</p>
+        <p style="color: #666; margin-top: 0.5rem;">Bedford, MK40 1AB</p>
+    </div>
+</div>
+
+<div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+    <h3 style="color: #d32f2f; margin-bottom: 1.5rem; font-size: 1.8rem;">🕒 Opening Hours</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+        <div style="padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+            <strong>Monday - Sunday</strong><br>
+            5:00 PM - 11:00 PM
+        </div>
+        <div style="padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+            <strong>Last Orders</strong><br>
+            10:30 PM
+        </div>
+        <div style="padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+            <strong>Delivery Time</strong><br>
+            30-45 minutes
+        </div>
+    </div>
+    
+    <h3 style="color: #d32f2f; margin-bottom: 1.5rem; font-size: 1.8rem;">🚚 Delivery Information</h3>
+    <ul style="line-height: 1.8; color: #555; margin-bottom: 2rem;">
+        <li>Free delivery on orders over £15</li>
+        <li>Minimum order: £8</li>
+        <li>Delivery time: 30-45 minutes</li>
+        <li>We deliver within a 3-mile radius</li>
+        <li>Cash and card payments accepted</li>
+    </ul>
+    
+    <h3 style="color: #d32f2f; margin-bottom: 1.5rem; font-size: 1.8rem;">📝 Send us a Message</h3>
+    <form style="display: grid; gap: 1rem;">
+        <div>
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Name:</label>
+            <input type="text" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div>
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Email:</label>
+            <input type="email" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;">
+        </div>
+        <div>
+            <label style="display: block; margin-bottom: 0.5rem; font-weight: bold;">Message:</label>
+            <textarea rows="5" style="width: 100%; padding: 0.8rem; border: 1px solid #ddd; border-radius: 5px;"></textarea>
+        </div>
+        <button type="submit" style="background: linear-gradient(135deg, #d32f2f 0%, #b71c1c 100%); color: white; padding: 1rem 2rem; border: none; border-radius: 5px; font-weight: bold; cursor: pointer;">Send Message</button>
+    </form>
+</div>
+
+<style>
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), #d32f2f;
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    margin-bottom: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+</style>
+{% endblock %} 

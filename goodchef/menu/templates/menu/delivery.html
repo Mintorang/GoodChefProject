@@ -1,0 +1,108 @@
+{% extends 'menu/base.html' %}
+
+{% block title %}Delivery - Good Chef{% endblock %}
+
+{% block content %}
+<div class="hero">
+    <h2>🚚 Delivery Information</h2>
+    <p>Fast and reliable delivery to your doorstep</p>
+</div>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 3rem;">
+    <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+        <h3 style="color: #d32f2f; margin-bottom: 1rem;">⏰ Delivery Time</h3>
+        <p style="font-size: 1.2rem; font-weight: bold; color: #333;">30-45 minutes</p>
+        <p style="color: #666; margin-top: 0.5rem;">From order to your door</p>
+    </div>
+    
+    <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+        <h3 style="color: #d32f2f; margin-bottom: 1rem;">💰 Free Delivery</h3>
+        <p style="font-size: 1.2rem; font-weight: bold; color: #333;">Orders over £15</p>
+        <p style="color: #666; margin-top: 0.5rem;">Standard delivery £2.50</p>
+    </div>
+    
+    <div style="background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1); text-align: center;">
+        <h3 style="color: #d32f2f; margin-bottom: 1rem;">📍 Delivery Area</h3>
+        <p style="font-size: 1.2rem; font-weight: bold; color: #333;">3-mile radius</p>
+        <p style="color: #666; margin-top: 0.5rem;">From our restaurant</p>
+    </div>
+</div>
+
+<div style="background: white; padding: 3rem; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+    <h3 style="color: #d32f2f; margin-bottom: 1.5rem; font-size: 1.8rem;">📋 Delivery Terms</h3>
+    <ul style="line-height: 1.8; color: #555; margin-bottom: 2rem;">
+        <li>Minimum order: £8</li>
+        <li>Free delivery on orders over £15</li>
+        <li>Standard delivery charge: £2.50</li>
+        <li>Delivery time: 30-45 minutes</li>
+        <li>We deliver within a 3-mile radius</li>
+        <li>Cash and card payments accepted</li>
+        <li>Please have correct change ready</li>
+    </ul>
+    
+    <h3 style="color: #d32f2f; margin-bottom: 1.5rem; font-size: 1.8rem;">🕒 Delivery Hours</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem;">
+        <div style="padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+            <strong>Monday - Sunday</strong><br>
+            5:00 PM - 11:00 PM
+        </div>
+        <div style="padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+            <strong>Last Delivery Order</strong><br>
+            10:30 PM
+        </div>
+        <div style="padding: 1rem; background: #f8f9fa; border-radius: 10px;">
+            <strong>Peak Hours</strong><br>
+            6:00 PM - 9:00 PM
+        </div>
+    </div>
+    
+    <h3 style="color: #d32f2f; margin-bottom: 1.5rem; font-size: 1.8rem;">📞 How to Order</h3>
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin-bottom: 2rem;">
+        <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 10px; text-align: center;">
+            <h4 style="color: #d32f2f; margin-bottom: 1rem;">1. Browse Menu</h4>
+            <p>Choose from our extensive menu of authentic Chinese dishes</p>
+        </div>
+        <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 10px; text-align: center;">
+            <h4 style="color: #d32f2f; margin-bottom: 1rem;">2. Call Us</h4>
+            <p>Call 01234 567890 to place your order</p>
+        </div>
+        <div style="padding: 1.5rem; background: #f8f9fa; border-radius: 10px; text-align: center;">
+            <h4 style="color: #d32f2f; margin-bottom: 1rem;">3. Wait for Delivery</h4>
+            <p>Your food will be delivered in 30-45 minutes</p>
+        </div>
+    </div>
+    
+    <h3 style="color: #d32f2f; margin-bottom: 1.5rem; font-size: 1.8rem;">🚨 Important Notes</h3>
+    <ul style="line-height: 1.8; color: #555;">
+        <li>Please provide clear delivery instructions</li>
+        <li>Have your phone number ready for delivery updates</li>
+        <li>Please be available to receive your order</li>
+        <li>We cannot deliver to PO boxes</li>
+        <li>Delivery times may vary during peak hours</li>
+        <li>We reserve the right to refuse delivery to unsafe areas</li>
+    </ul>
+</div>
+
+<style>
+.hero {
+    background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), #d32f2f;
+    color: white;
+    text-align: center;
+    padding: 4rem 2rem;
+    margin-bottom: 3rem;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+}
+
+.hero h2 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero p {
+    font-size: 1.2rem;
+    opacity: 0.9;
+}
+</style>
+{% endblock %} 
