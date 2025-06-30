@@ -1,0 +1,9 @@
+{% extends 'menu/base.html' %}
+{% block title %}Page Not Found - Good Chef{% endblock %}
+{% block content %}
+<div class="hero" style="background: #d32f2f; color: white; text-align: center; padding: 4rem 2rem; border-radius: 15px; margin: 3rem 0;">
+    <h2 style="font-size: 3rem;">404</h2>
+    <p style="font-size: 1.5rem; margin-bottom: 2rem;">Oops! The page you are looking for does not exist.</p>
+    <a href="{% url 'menu:menu_list' %}" class="cta-button">Back to Menu</a>
+</div>
+{% endblock %} 

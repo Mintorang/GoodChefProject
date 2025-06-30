@@ -1,0 +1,28 @@
+{% extends 'menu/base.html' %}
+{% block title %}All Menu Items - Good Chef{% endblock %}
+{% block content %}
+<div class="hero">
+    <h2>🍜 All Menu Items</h2>
+    <p>Explore every dish we offer below.</p>
+</div>
+<div class="menu-grid">
+    {% for item in menu_items %}
+    <div class="menu-item">
+        <div class="item-info">
+            <div class="item-name">{{ item.name }}</div>
+            {% if item.description %}
+            <div class="item-description">{{ item.description }}</div>
+            {% endif %}
+        </div>
+        <div style="display: flex; align-items: center;">
+            <span class="item-price">£{{ item.price }}</span>
+            <button class="add-to-cart" onclick="addToCart('{{ item.name }}', {{ item.price }})">
+                <i class="fas fa-plus"></i> Add
+            </button>
+        </div>
+    </div>
+    {% empty %}
+    <p style="color: #666; font-style: italic;">No items available.</p>
+    {% endfor %}
+</div>
+{% endblock %} 

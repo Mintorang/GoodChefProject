@@ -287,7 +287,7 @@
                 <li><a href="{% url 'menu:contact' %}">📧 Contact</a></li>
                 <li><a href="{% url 'menu:delivery' %}">🚚 Delivery</a></li>
                 <li style="position: relative;">
-                    <a href="#" onclick="openCart()">
+                    <a href="{% url 'menu:checkout' %}">
                         🛒 Cart <span class="cart-count" id="cartCount">0</span>
                     </a>
                 </li>

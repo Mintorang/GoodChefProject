@@ -1,0 +1,19 @@
+{% extends 'menu/base.html' %}
+{% block title %}Categories - Good Chef{% endblock %}
+{% block content %}
+<div class="hero">
+    <h2>🍱 Menu Categories</h2>
+    <p>Browse our delicious categories below.</p>
+</div>
+<div class="menu-grid">
+    {% for category in categories %}
+    <div class="category-card">
+        <span class="category-emoji">{{ category.emoji }}</span>
+        <h3 class="category-title">{{ category.name }}</h3>
+        <a href="{% url 'menu:category_detail' category.id %}" class="cta-button">View Items</a>
+    </div>
+    {% empty %}
+    <p style="color: #666; font-style: italic;">No categories available.</p>
+    {% endfor %}
+</div>
+{% endblock %} 

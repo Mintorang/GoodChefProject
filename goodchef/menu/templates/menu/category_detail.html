@@ -1,0 +1,29 @@
+{% extends 'menu/base.html' %}
+{% block title %}Category - Good Chef{% endblock %}
+{% block content %}
+<div class="hero">
+    <h2>{{ category.emoji }} {{ category.name }}</h2>
+    <p>Explore the delicious items in this category.</p>
+</div>
+<div class="menu-grid">
+    {% for item in items %}
+    <div class="menu-item">
+        <div class="item-info">
+            <div class="item-name">{{ item.name }}</div>
+            {% if item.description %}
+            <div class="item-description">{{ item.description }}</div>
+            {% endif %}
+        </div>
+        <div style="display: flex; align-items: center;">
+            <span class="item-price">£{{ item.price }}</span>
+            <button class="add-to-cart" onclick="addToCart('{{ item.name }}', {{ item.price }})">
+                <i class="fas fa-plus"></i> Add
+            </button>
+        </div>
+    </div>
+    {% empty %}
+    <p style="color: #666; font-style: italic;">No items available in this category.</p>
+    {% endfor %}
+</div>
+<a href="{% url 'menu:categories' %}" class="cta-button" style="margin-top:2rem;">Back to Categories</a>
+{% endblock %} 
